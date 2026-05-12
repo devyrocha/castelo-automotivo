@@ -19,6 +19,7 @@ import beforeAfter2 from "@/assets/before-after-2.jpg";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 import { SITE, WHATSAPP_URL } from "@/lib/site-config";
+import logo from "@/assets/logo.png";
 
 
 export const Route = createFileRoute("/")({
@@ -90,7 +91,8 @@ function Header() {
       {/* LOGO */}
       <a href="#top" className="flex items-center gap-2">
         <img
-          src="src/assets/logo.png"
+          <img
+  src={logo}
           alt="Logo Castelo Estética Automotiva"
           className="h-12 w-auto object-contain"
         />
@@ -167,7 +169,8 @@ function Header() {
 
           <div className="flex items-center gap-3">
             <img
-              src="src/assets/logo.png"
+              <img
+  src={logo}
               alt="Logo Castelo"
               className="h-12 w-auto object-contain"
             />
@@ -540,7 +543,8 @@ function Footer() {
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-muted-foreground">
         <a href="#top" className="flex items-center gap-2">
           <img
-            src="src/assets/logo.png"
+            <img
+  src={logo}
             alt="Logo Castelo Estética Automotiva"
             className="h-12 w-auto object-contain"
           />
