@@ -1,7 +1,10 @@
+import { useState } from "react";
+
 import { createFileRoute } from "@tanstack/react-router";
 import {
   MapPin, Phone, Instagram, Clock, MessageCircle, Star, Sparkles,
   Car, Droplets, Wind, Shield, Wrench, Leaf, Wifi, Truck, CheckCircle2,
+  Menu, X
 } from "lucide-react";
 import heroCar from "@/assets/hero-car.jpg";
 import serviceEncer from "@/assets/enceramento.jpg";
@@ -78,28 +81,197 @@ function LandingPage() {
 }
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/70 border-b border-border">
+    <header className="sticky top-0 z-50 bg-black border-b border-red-600/20">    
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2">
-          <img
-            src="src/assets/logo.png"
-            alt="Logo Castelo Estética Automotiva"
-            className="h-12 w-auto object-contain"
-          />
+
+      {/* LOGO */}
+      <a href="#top" className="flex items-center gap-2">
+        <img
+          src="src/assets/logo.png"
+          alt="Logo Castelo Estética Automotiva"
+          className="h-12 w-auto object-contain"
+        />
+      </a>
+
+      {/* MENU DESKTOP */}
+      <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+        <a href="#servicos" className="hover:text-primary transition-colors">
+          Serviços
         </a>
 
+        <a href="#galeria" className="hover:text-primary transition-colors">
+          Galeria
+        </a>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-          <a href="#servicos" className="hover:text-primary transition-colors">Serviços</a>
-          <a href="#galeria" className="hover:text-primary transition-colors">Galeria</a>
-          <a href="#avaliacoes" className="hover:text-primary transition-colors">Avaliações</a>
-          <a href="#contato" className="hover:text-primary transition-colors">Contato</a>
+        <a href="#avaliacoes" className="hover:text-primary transition-colors">
+          Avaliações
+        </a>
+
+        <a href="#contato" className="hover:text-primary transition-colors">
+          Contato
+        </a>
+      </nav>
+
+      {/* BOTÃO WHATSAPP DESKTOP */}
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hidden sm:inline-flex items-center gap-2 rounded-full bg-whatsapp text-whatsapp-foreground px-4 py-2 text-sm font-semibold hover:scale-105 transition-transform"
+      >
+        <MessageCircle className="w-4 h-4" />
+        WhatsApp
+      </a>
+
+      {/* BOTÃO MENU MOBILE */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="md:hidden text-white"
+      >
+        {menuOpen ? (
+          <X className="w-7 h-7" />
+        ) : (
+          <Menu className="w-7 h-7" />
+        )}
+      </button>
+    </div>
+
+      {/* MENU MOBILE */}
+
+      {/* OVERLAY ESCURO */}
+      <div
+        className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-40 transition-opacity duration-300 ${menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+        onClick={() => setMenuOpen(false)}
+      />
+
+      {/* MENU LATERAL */}
+      {/* OVERLAY */}
+      <div
+        className={`fixed inset-0 bg-black/80 z-40 transition-opacity duration-300 ${menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+        onClick={() => setMenuOpen(false)}
+      ></div>
+
+      {/* MENU */}
+      <div
+        className={`fixed top-0 right-0 h-full w-[260px] bg-black z-50 border-l border-red-600/30 shadow-[0_0_40px_rgba(255,0,0,0.15)] transform transition-transform duration-300 ${menuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+      >
+
+        {/* HEADER */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-red-600/20">
+
+          <div className="flex items-center gap-3">
+            <img
+              src="src/assets/logo.png"
+              alt="Logo Castelo"
+              className="h-12 w-auto object-contain"
+            />
+
+            <div>
+              <h2 className="text-white font-bold text-base leading-none">
+                Castelo
+              </h2>
+
+              <p className="text-red-500 text-xs tracking-[3px] uppercase mt-1">
+                Premium
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="text-white hover:text-red-500 transition-colors"
+          >
+            <X className="w-8 h-8" />
+          </button>
+        </div>
+
+        {/* LINKS */}
+        <nav className="flex flex-col px-6 py-8 gap-3">
+
+          <a
+            href="#servicos"
+            onClick={() => setMenuOpen(false)}
+            className="group flex items-center justify-between bg-zinc-900 border border-zinc-800 hover:border-red-500 rounded-xl px-4 py-4 transition-all duration-300 hover:bg-red-600/10"
+          >
+            <span className="text-white text-base font-semibold">
+              Serviços
+            </span>
+
+            <span className="text-red-500 text-xl group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+          </a>
+
+          <a
+            href="#galeria"
+            onClick={() => setMenuOpen(false)}
+            className="group flex items-center justify-between bg-zinc-900 border border-zinc-800 hover:border-red-500 rounded-xl px-4 py-4 transition-all duration-300 hover:bg-red-600/10"
+          >
+            <span className="text-white text-base font-semibold">
+              Galeria
+            </span>
+
+            <span className="text-red-500 text-xl group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+          </a>
+
+          <a
+            href="#avaliacoes"
+            onClick={() => setMenuOpen(false)}
+            className="group flex items-center justify-between bg-zinc-900 border border-zinc-800 hover:border-red-500 rounded-xl px-4 py-4 transition-all duration-300 hover:bg-red-600/10"
+          >
+            <span className="text-white text-base font-semibold">
+              Avaliações
+            </span>
+
+            <span className="text-red-500 text-xl group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+          </a>
+
+          <a
+            href="#contato"
+            onClick={() => setMenuOpen(false)}
+            className="group flex items-center justify-between bg-zinc-900 border border-zinc-800 hover:border-red-500 rounded-xl px-4 py-4 transition-all duration-300 hover:bg-red-600/10"
+          >
+            <span className="text-white text-base font-semibold">
+              Contato
+            </span>
+
+            <span className="text-red-500 text-xl group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+          </a>
+
+          {/* BOTÃO */}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center justify-center gap-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-bold text-base py-2 shadow-lg transition-all duration-300"
+          >
+            <MessageCircle className="w-6 h-6" />
+            WhatsApp
+          </a>
         </nav>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-          className="hidden sm:inline-flex items-center gap-2 rounded-full bg-whatsapp text-whatsapp-foreground px-4 py-2 text-sm font-semibold hover:scale-105 transition-transform">
-          <MessageCircle className="w-4 h-4" /> WhatsApp
-        </a>
+
+        {/* FOOTER */}
+        <div className="absolute bottom-0 left-0 w-full px-6 py-5 border-t border-zinc-800 bg-black">
+          <p className="text-zinc-400 text-sm">
+            Castelo Estética Automotiva
+          </p>
+
+          <p className="text-red-500 text-xs mt-1 tracking-widest uppercase">
+            Manaus • Premium Detail
+          </p>
+        </div>
       </div>
     </header>
   );
@@ -115,7 +287,7 @@ function Hero() {
           <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05]">
             Seu carro <span className="text-gradient-gold">limpo, brilhando</span> e pronto no mesmo dia.
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl">
+          <p className="mt-6 text-base text-muted-foreground max-w-xl">
             Somos especialistas em lavagem detalhada, higienização interna, polimento e
             estética automotiva premium em Manaus. Agende seu serviço em até 30 segundos.
           </p>
@@ -147,7 +319,7 @@ function Hero() {
           <div className="relative shine-overlay rounded-3xl overflow-hidden border border-border shadow-card">
             <img src={heroCar} alt="Carro esportivo preto recém-lavado e brilhando" width={1920} height={1280} className="w-full h-full object-cover aspect-[4/3]" />
           </div>
-          <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-2xl p-4 shadow-card hidden sm:flex items-center gap-3">
+          <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-xl p-4 shadow-card hidden sm:flex items-center gap-3">
             <div className="w-12 h-12 grid place-items-center rounded-xl bg-gradient-gold text-primary-foreground">
               <CheckCircle2 className="w-6 h-6" />
             </div>
@@ -156,7 +328,7 @@ function Hero() {
               <p className="text-xs text-muted-foreground">Agende e retire no mesmo dia</p>
             </div>
           </div>
-          <div className="absolute -top-6 -right-6 bg-card border border-border rounded-2xl p-4 shadow-card hidden sm:flex items-center gap-3">
+          <div className="absolute -top-6 -right-6 bg-card border border-border rounded-xl p-4 shadow-card hidden sm:flex items-center gap-3">
             <div className="w-12 h-12 grid place-items-center rounded-xl bg-primary/15 text-primary">
               <Droplets className="w-6 h-6" />
             </div>
@@ -179,12 +351,12 @@ function Services() {
           subtitle="Do banho rápido ao detalhamento completo: cuidamos do seu carro com produtos premium." />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((s) => (
-            <article key={s.name} className="group relative rounded-2xl border border-border bg-card overflow-hidden shadow-card hover:border-primary/60 transition-colors">
+            <article key={s.name} className="group relative rounded-xl border border-border bg-card overflow-hidden shadow-card hover:border-primary/60 transition-colors">
               <div className="aspect-[4/3] overflow-hidden">
                 <img src={s.img} alt={s.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-5">
-                <h3 className="font-bold text-lg">{s.name}</h3>
+                <h3 className="font-bold text-base">{s.name}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{s.desc}</p>
                 <div className="mt-4 flex items-center justify-between text-sm">
                   <div>
@@ -232,7 +404,7 @@ function SocialProof() {
           subtitle="+5.000 clientes atendidos · Avaliação média 4.9 no Google" />
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+            <div key={t.name} className="rounded-xl border border-border bg-card p-6 shadow-card">
               <div className="flex items-center gap-1 text-primary mb-3">
                 {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
               </div>
@@ -256,7 +428,7 @@ function SocialProof() {
             { n: "+5 anos", l: "De experiência" },
             { n: "98%", l: "Clientes recorrentes" },
           ].map((s) => (
-            <div key={s.l} className="text-center rounded-2xl border border-border bg-card/50 p-6">
+            <div key={s.l} className="text-center rounded-xl border border-border bg-card/50 p-6">
               <p className="font-display font-extrabold text-3xl text-gradient-gold">{s.n}</p>
               <p className="text-sm text-muted-foreground mt-1">{s.l}</p>
             </div>
@@ -271,11 +443,11 @@ function Differentials() {
   return (
     <section className="py-20 lg:py-28 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <SectionHeader eyebrow="Por que escolher" title={<>Diferenciais <span className="text-gradient-gold">BrilhoMax</span></>}
+        <SectionHeader eyebrow="Por que escolher" title={<>Diferenciais <span className="text-gradient-gold">do Castelo</span></>}
           subtitle="Tudo que um lava jato premium em Manaus precisa entregar — e mais." />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {differentials.map((d) => (
-            <div key={d.title} className="group rounded-2xl border border-border bg-card p-6 hover:border-primary/60 hover:-translate-y-1 transition-all shadow-card">
+            <div key={d.title} className="group rounded-xl border border-border bg-card p-6 hover:border-primary/60 hover:-translate-y-1 transition-all shadow-card">
               <div className="w-12 h-12 grid place-items-center rounded-xl bg-primary/15 text-primary group-hover:bg-gradient-gold group-hover:text-primary-foreground transition-colors">
                 <d.icon className="w-6 h-6" />
               </div>
@@ -320,7 +492,7 @@ function Contact() {
         <SectionHeader eyebrow="Visite-nos" title={<>Onde nos <span className="text-gradient-gold">encontrar</span></>}
           subtitle="Estamos no coração de Manaus, prontos para receber seu carro." />
         <div className="mt-12 grid lg:grid-cols-2 gap-8">
-          <div className="rounded-2xl overflow-hidden border border-border shadow-card aspect-[4/3] lg:aspect-auto">
+          <div className="rounded-xl overflow-hidden border border-border shadow-card aspect-[4/3] lg:aspect-auto">
             <iframe
               title="Mapa Castelo"
               src={SITE.mapsEmbed}
@@ -350,7 +522,7 @@ function ContactItem({ icon: Icon, title, text, href }: { icon: any; title: stri
   const Wrap: any = href ? "a" : "div";
   return (
     <Wrap href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
-      className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4 hover:border-primary/60 transition-colors">
+      className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 hover:border-primary/60 transition-colors">
       <div className="w-12 h-12 grid place-items-center rounded-xl bg-primary/15 text-primary">
         <Icon className="w-5 h-5" />
       </div>
